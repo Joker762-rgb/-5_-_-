@@ -1,0 +1,14 @@
+Original vector:
+Name: luka, Hire Date: 17.02.2006, Position: boss, Salary: 91232
+Name: kuka, Hire Date: 29.12.2009, Position: manager, Salary: 18745
+Name: buka, Hire Date: 05.03.2011, Position: worker, Salary: 29385
+
+Set (sorted by salary):
+Name: luka, Hire Date: 17.02.2006, Position: boss, Salary: 91232
+Name: buka, Hire Date: 05.03.2011, Position: worker, Salary: 29385
+Name: kuka, Hire Date: 29.12.2009, Position: manager, Salary: 18745
+
+Unordered Set:
+Name: luka, Hire Date: 17.02.2006, Position: boss, Salary: 91232
+Name: kuka, Hire Date: 29.12.2009, Position: manager, Salary: 18745
+Name: buka, Hire Date: 05.03.2011, Position: worker, Salary: 29385
