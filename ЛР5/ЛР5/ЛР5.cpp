@@ -1,5 +1,9 @@
-//Вариант 9. объект - сотрудник(поля: ФИО, дата, приема на работу, должность, базовый оклад), исходный контейнер vector копируем в deque
-// сортировка по окладу
+//Р’Р°СЂРёР°РЅС‚ 9. РѕР±СЉРµРєС‚ - СЃРѕС‚СЂСѓРґРЅРёРє(РїРѕР»СЏ: Р¤РРћ, РґР°С‚Р°, РїСЂРёРµРјР° РЅР° СЂР°Р±РѕС‚Сѓ, РґРѕР»Р¶РЅРѕСЃС‚СЊ, Р±Р°Р·РѕРІС‹Р№ РѕРєР»Р°Рґ), РёСЃС…РѕРґРЅС‹Р№ РєРѕРЅС‚РµР№РЅРµСЂ vector РєРѕРїРёСЂСѓРµРј РІ deque
+// СЃРѕСЂС‚РёСЂРѕРІРєР° РїРѕ РѕРєР»Р°РґСѓ
+//Р”Р»СЏ РєР»Р°СЃСЃР°, СЂР°Р·СЂР°Р±РѕС‚Р°РЅРЅРѕРіРѕ РІ Р›Р 4, РѕР±РµСЃРїРµС‡РёС‚СЊ РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ РґРѕР±Р°РІР»РµРЅРёСЏ РѕР±СЉРµРєС‚РѕРІ РІ
+//РєРѕРЅС‚РµР№РЅРµСЂ set(СЃРѕСЂС‚РёСЂРѕРІРєР° РєР°Рє СѓРєР°Р·Р°РЅРѕ РІ Р·Р°РґР°РЅРёРё РЅР° Р›Р 4) Рё РІ РєРѕРЅС‚РµР№РЅРµСЂ unordered_set.
+//РСЃС…РѕРґРЅС‹Рµ РґР°РЅРЅС‹Рµ РєР°Рє РІ Р›Р 4 С‡РёС‚Р°С‚СЊ РёР· С„Р°Р№Р»Р°, РІС‹РІРµСЃС‚Рё РЅР° РїРµС‡Р°С‚СЊ РґР»СЏ РєРѕРЅС‚СЂРѕР»СЏ РѕР±СЉРµРєС‚С‹
+//РєРѕРЅС‚РµР№РЅРµСЂРѕРІ
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -21,26 +25,26 @@ public:
     Employee(string n, string hd, string p, double s)
         : name(n), hireDate(hd), position(p), salary(s) {}
 
-    // Перегрузка оператора для вывода объекта в поток
+    // РџРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° РґР»СЏ РІС‹РІРѕРґР° РѕР±СЉРµРєС‚Р° РІ РїРѕС‚РѕРє
     friend ostream& operator<<(ostream& os, const Employee& emp) {
         os << "Name: " << emp.name << ", Hire Date: " << emp.hireDate
             << ", Position: " << emp.position << ", Salary: " << emp.salary;
         return os;
     }
 
-    // Перегрузка оператора для сортировки по окладу (для set)
+    // РџРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° РґР»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё РїРѕ РѕРєР»Р°РґСѓ (РґР»СЏ set)
     bool operator<(const Employee& other) const {
-        return salary > other.salary; // Сортировка по убыванию зарплаты
+        return salary > other.salary; // // РЎРѕСЂС‚РёСЂРѕРІРєР° РїРѕ СѓР±С‹РІР°РЅРёСЋ Р·Р°СЂРїР»Р°С‚С‹
     }
 
-    // Перегрузка оператора равенства (для unordered_set)
+    // РџРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° СЂР°РІРµРЅСЃС‚РІР° (РґР»СЏ unordered_set)
     bool operator==(const Employee& other) const {
         return name == other.name && hireDate == other.hireDate &&
             position == other.position && salary == other.salary;
     }
 };
 
-// Хэш-функция для Employee (для unordered_set)
+// РҐСЌС€-С„СѓРЅРєС†РёСЏ РґР»СЏ Employee (РґР»СЏ unordered_set)
 struct EmployeeHash {
     size_t operator()(const Employee& emp) const {
         return hash<string>()(emp.name) ^ hash<string>()(emp.hireDate) ^
@@ -53,19 +57,19 @@ int main() {
     ofstream output("output.txt");
 
     vector<Employee> vec;
-    set<Employee> empSet; // Контейнер set для сортировки по зарплате
-    unordered_set<Employee, EmployeeHash> empUnorderedSet; // Контейнер unordered_set
+    set<Employee> empSet; // РљРѕРЅС‚РµР№РЅРµСЂ set РґР»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё РїРѕ Р·Р°СЂРїР»Р°С‚Рµ
+    unordered_set<Employee, EmployeeHash> empUnorderedSet; // РљРѕРЅС‚РµР№РЅРµСЂ unordered_set
 
     string name, hireDate, position;
     double salary;
     while (input >> name >> hireDate >> position >> salary) {
         Employee emp(name, hireDate, position, salary);
         vec.emplace_back(emp);
-        empSet.insert(emp); // Добавление в set
-        empUnorderedSet.insert(emp); // Добавление в unordered_set
+        empSet.insert(emp); // Р”РѕР±Р°РІР»РµРЅРёРµ РІ set
+        empUnorderedSet.insert(emp); // Р”РѕР±Р°РІР»РµРЅРёРµ РІ unordered_set
     }
 
-    // Вывод исходного вектора
+    // Р’С‹РІРѕРґ РёСЃС…РѕРґРЅРѕРіРѕ РІРµРєС‚РѕСЂР°
     output << "Original vector:\n";
     cout << "Original vector:\n";
     for (const auto& emp : vec) {
@@ -73,7 +77,7 @@ int main() {
         cout << emp << "\n";
     }
 
-    // Вывод содержимого set (отсортированного по зарплате)
+    // Р’С‹РІРѕРґ СЃРѕРґРµСЂР¶РёРјРѕРіРѕ set (РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅРѕРіРѕ РїРѕ Р·Р°СЂРїР»Р°С‚Рµ)
     output << "\nSet (sorted by salary):\n";
     cout << "\nSet (sorted by salary):\n";
     for (const auto& emp : empSet) {
@@ -81,7 +85,7 @@ int main() {
         cout << emp << "\n";
     }
 
-    // Вывод содержимого unordered_set
+    // Р’С‹РІРѕРґ СЃРѕРґРµСЂР¶РёРјРѕРіРѕ unordered_set
     output << "\nUnordered Set:\n";
     cout << "\nUnordered Set:\n";
     for (const auto& emp : empUnorderedSet) {
